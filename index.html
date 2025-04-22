@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Before After Slider</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #000;
+    }
+
+    .container {
+      position: relative;
+      width: 90%;
+      max-width: 800px;
+      height: 400px;
+      overflow: hidden;
+    }
+
+    .before, .after {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .before img, .after img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .after-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .handle {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 4px;
+      height: 100%;
+      background: white;
+      cursor: ew-resize;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="container">
+    <div class="before">
+      <img src="https://drive.google.com/uc?export=view&id=1McLbHQd-I0jAZE_fUrZn9pnFsu1rydw2" alt="Before Image" />
+    </div>
+    <div class="after-wrapper" id="slider">
+      <div class="after">
+        <img src="https://drive.google.com/uc?export=view&id=1m6P1KGrmvM7bYNEoxepItb-fMFgn45uF" alt="After Image" />
+      </div>
+    </div>
+    <div class="handle" id="handle"></div>
+  </div>
+
+  <script>
+    const container = document.getElementById("container");
+    const slider = document.getElementById("slider");
+    const handle = document.getElementById("handle");
+
+    container.addEventListener("pointermove", function(e) {
+      const rect = container.getBoundingClientRect();
+      let x = e.clientX - rect.left;
+      x = Math.max(0, Math.min(x, rect.width));
+      slider.style.width = x + "px";
+      handle.style.left = x + "px";
+    });
+  </script>
+</body>
+</html>
